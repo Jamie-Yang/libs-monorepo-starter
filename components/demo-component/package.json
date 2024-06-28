@@ -1,0 +1,25 @@
+{
+  "name": "demo-component",
+  "version": "0.0.0",
+  "type": "module",
+  "module": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./lib/demo-component.es.d.ts"
+    }
+  },
+  "files": [
+    "lib",
+    "types",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "compile": "cli compile",
+    "compile:watch": "cli compile -w"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "vue": "3.4.27"
+  }
+}

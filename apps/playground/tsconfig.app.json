@@ -1,0 +1,8 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["./src/**/*", "typings"],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": "."
+  }
+}

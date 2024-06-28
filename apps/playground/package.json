@@ -1,0 +1,21 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cli dev",
+    "build": "npm run type-check && cli build",
+    "preview": "cli preview"
+  },
+  "dependencies": {
+    "demo-component": "workspace:*",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.27",
+    "vue-router": "^4.3.3"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@vue/tsconfig": "^0.5.1"
+  }
+}
