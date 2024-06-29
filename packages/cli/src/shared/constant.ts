@@ -4,6 +4,7 @@ import { LibraryFormats } from 'vite'
 
 export const CWD = process.cwd()
 
+export const PACKAGE_JSON = resolve(CWD, 'package.json')
 export const PACKAGE_CONFIG = resolve(CWD, 'package.config.js')
 
 export const PACKAGE_SOURCE_PATH = resolve(CWD, 'src')

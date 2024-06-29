@@ -2,35 +2,17 @@ import type { InlineConfig, PluginOption } from 'vite'
 
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import { pathExistsSync } from 'fs-extra/esm'
 import { mergeConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import { libInjectCss } from 'vite-plugin-lib-inject-css'
 
-import {
-  APP_OUTPUT_PATH,
-  APP_PUBLIC_PATH,
-  PACKAGE_JS_ENTRY,
-  VITE_LIBRARY_FORMATS,
-  PACKAGE_OUTPUT_PATH,
-  PACKAGE_TS_ENTRY,
-  VITE_RESOLVE_EXTENSIONS,
-} from '../shared/constant.js'
+import { APP_OUTPUT_PATH, APP_PUBLIC_PATH, VITE_LIBRARY_FORMATS, PACKAGE_OUTPUT_PATH, VITE_RESOLVE_EXTENSIONS } from '../shared/constant.js'
+import { getEntry } from '../shared/entry.js'
 
 interface PackageConfig {
   name?: string // lib name
   host?: boolean
   configureVite?: (config: InlineConfig, command: string) => InlineConfig
-}
-
-export function getEntry() {
-  if (pathExistsSync(PACKAGE_TS_ENTRY)) {
-    return PACKAGE_TS_ENTRY
-  }
-
-  if (pathExistsSync(PACKAGE_JS_ENTRY)) {
-    return PACKAGE_JS_ENTRY
-  }
 }
 
 const commonPlugins = [vue(), vueJsx()] as PluginOption[]

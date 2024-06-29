@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-import { createRequire } from 'module'
+import { createRequire } from 'node:module'
 
 import { Command } from 'commander'
 
 import { build } from './commands/build.js'
+import { bundle } from './commands/bundle.js'
 import { compile } from './commands/compile.js'
 import { dev } from './commands/dev.js'
 import { preview } from './commands/preview.js'
@@ -35,9 +36,15 @@ program
 
 program
   .command('compile')
-  .option('-w --watch', 'Compile vue component to library code in watch mode')
-  .description('Compile vue component to library code')
+  .option('-w --watch', 'Compile Vue component into library code in watch mode')
+  .description('Compile Vue component into library code')
   .action(compile)
+
+program
+  .command('bundle') //
+  .option('-w --watch', 'Bundle utilities in watch mode')
+  .description('Bundle utilities')
+  .action(bundle)
 
 program.on('command:*', ([cmd]) => {
   program.outputHelp()

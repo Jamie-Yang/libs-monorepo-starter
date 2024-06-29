@@ -25,3 +25,5 @@ apps/*/dist
 packages/*/lib
 !packages/cli/lib
 packages/*/lib
+packages/*/dist
+packages/*/dist_npm

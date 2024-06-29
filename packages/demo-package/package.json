@@ -1,0 +1,19 @@
+{
+  "name": "demo-package",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "files": [
+    "lib",
+    "types",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "dev": "cli bundle --watch",
+    "build": "cli bundle"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0"
+  },
+  "devDependencies": {}
+}

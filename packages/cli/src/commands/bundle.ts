@@ -1,11 +1,15 @@
+import { createRequire } from 'node:module'
+
 import * as chokidar from 'chokidar'
-import { build as buildVite } from 'vite'
 
 import { getConfig } from '../config/index.js'
-import { getLibConfig } from '../config/vite.js'
+import { getLibConfig } from '../config/rollup.js'
 import { PACKAGE_CONFIG, PACKAGE_SOURCE_PATH } from '../shared/constant.js'
 import { getEntry } from '../shared/entry.js'
 import logger from '../shared/logger.js'
+
+const require = createRequire(import.meta.url)
+const rollup = require('rollup')
 
 async function runTask() {
   if (!getEntry()) {
@@ -14,16 +18,20 @@ async function runTask() {
   }
 
   const config = await getConfig()
-  const libConfig = getLibConfig(config)
+  const optionsList = getLibConfig(config)
 
   try {
-    await buildVite(libConfig)
+    for (const options of optionsList) {
+      const bundle = await rollup.rollup(options)
+      const output = Array.isArray(options.output) ? options.output : [options.output]
+      await Promise.all(output.map(bundle.write))
+    }
   } catch (e: unknown) {
     logger.error((e as Error).toString())
   }
 }
 
-export async function compile({ watch = false }) {
+export async function bundle({ watch = false }) {
   await runTask()
 
   if (watch) {
