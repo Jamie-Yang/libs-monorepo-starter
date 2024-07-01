@@ -22,8 +22,8 @@ node_modules
 *.sw?
 
 apps/*/dist
+components/*/lib
+components/*/types
 packages/*/lib
+packages/*/types
 !packages/cli/lib
-packages/*/lib
-packages/*/dist
-packages/*/dist_npm

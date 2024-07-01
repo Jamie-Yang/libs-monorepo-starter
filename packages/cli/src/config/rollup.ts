@@ -15,7 +15,7 @@ interface PackageConfig {
 
 const require = createRequire(import.meta.url)
 const commonjs = require('@rollup/plugin-commonjs')
-const terser = require('@rollup/plugin-terser')
+// const terser = require('@rollup/plugin-terser')
 const typescript = require('@rollup/plugin-typescript')
 
 const commonPlugins = [
@@ -32,23 +32,22 @@ export function getLibConfig(packageConfig: PackageConfig): RollupOptions[] {
   return [
     {
       input: 'src/index.ts',
-      output: [{ file: 'dist_npm/index.d.ts', format: 'es' }],
+      output: [{ file: 'types/index.d.ts', format: 'es' }],
       plugins: [dts()],
     },
     {
       input: 'src/index.ts',
       output: [
-        { banner, exports: 'named', format: 'esm', name, file: `dist_npm/${name}.es.js` },
-        { banner, exports: 'named', format: 'cjs', name, file: `dist_npm/${name}.js` },
-        { banner, exports: 'named', format: 'umd', name, file: `dist/${name}.js` },
+        { banner, exports: 'auto', format: 'esm', name, file: `lib/${name}.es.js` },
+        // { banner, exports: 'auto', format: 'umd', name, file: `dist/${name}.umd.js` },
       ],
       plugins: commonPlugins,
     },
-    {
-      input: 'src/index.ts',
-      output: { banner, exports: 'named', format: 'umd', name, file: `dist/${name}.min.js`, sourcemap: true },
-      plugins: [...commonPlugins, terser()],
-    },
+    // {
+    //   input: 'src/index.ts',
+    //   output: { banner, exports: 'auto', format: 'umd', name, file: `dist/${name}.min.js`, sourcemap: true },
+    //   plugins: [...commonPlugins, terser()],
+    // },
   ]
 }
 

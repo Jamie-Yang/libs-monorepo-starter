@@ -1,8 +1,14 @@
 {
   "name": "demo-package",
   "version": "0.0.0",
-  "description": "",
   "type": "module",
+  "module": "./lib/demo-package.es.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/demo-package.es.ts",
+      "types": "./lib/demo-package.d.ts"
+    }
+  },
   "files": [
     "lib",
     "types",

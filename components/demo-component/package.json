@@ -15,8 +15,8 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "compile": "cli compile",
-    "compile:watch": "cli compile -w"
+    "dev": "cli compile -w",
+    "build": "cli compile"
   },
   "dependencies": {},
   "peerDependencies": {
