@@ -26,4 +26,3 @@ components/*/lib
 components/*/types
 packages/*/lib
 packages/*/types
-!packages/cli/lib
