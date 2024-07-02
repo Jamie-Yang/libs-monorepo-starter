@@ -1,15 +1,14 @@
 {
   "compilerOptions": {
     "outDir": "./lib",
-    "target": "ES2022",
-    "module": "Preserve",
-    "moduleResolution": "Bundler",
+    "target": "ESNext",
+    "module": "ESNext",
     "strict": true,
     "downlevelIteration": true,
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "jsx": "preserve",
+    "moduleResolution": "Node",
     "lib": ["esnext", "dom"],
     "allowJs": true
   },

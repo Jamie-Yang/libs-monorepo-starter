@@ -1,0 +1,30 @@
+{
+  "name": "aliyun-sls",
+  "version": "0.0.0",
+  "type": "module",
+  "module": "./lib/aliyun-sls.es.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/aliyun-sls.es.ts",
+      "types": "./lib/aliyun-sls.d.ts"
+    }
+  },
+  "files": [
+    "lib",
+    "types",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "dev": "cli bundle --watch",
+    "build": "cli bundle"
+  },
+  "dependencies": {
+    "@aliyun-sls/web-track-browser": "^0.3.5",
+    "useragent": "^2.3.0"
+  },
+  "devDependencies": {
+    "@aliyun-sls/web-types": "^0.3.5",
+    "@babel/preset-typescript": "^7.24.7",
+    "@types/useragent": "^2.3.4"
+  }
+}

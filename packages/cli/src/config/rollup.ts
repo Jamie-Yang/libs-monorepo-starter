@@ -2,27 +2,45 @@ import type { RollupOptions } from 'rollup'
 
 import { createRequire } from 'module'
 
-import { babel } from '@rollup/plugin-babel'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
+import babel from '@rollup/plugin-babel'
+import commonjs from '@rollup/plugin-commonjs'
+import json from '@rollup/plugin-json'
+import nodeResolve from '@rollup/plugin-node-resolve'
+// import terser from '@rollup/plugin-terser'
+import typescript from '@rollup/plugin-typescript'
 import dts from 'rollup-plugin-dts'
 
 import { PACKAGE_JSON } from '../shared/constant.js'
 
 interface PackageConfig {
   name?: string // lib name
-  configureVite?: (config: RollupOptions[], command: string) => RollupOptions[]
+  configureRollup?: (config: RollupOptions[], command: string) => RollupOptions[]
 }
 
 const require = createRequire(import.meta.url)
-const commonjs = require('@rollup/plugin-commonjs')
-// const terser = require('@rollup/plugin-terser')
-const typescript = require('@rollup/plugin-typescript')
+
+const extensions = ['.js', '.ts']
 
 const commonPlugins = [
-  nodeResolve(), //
-  typescript({ tsconfig: false }),
-  babel({ babelHelpers: 'bundled' }),
+  nodeResolve({
+    extensions,
+    preferBuiltins: false,
+  }),
   commonjs(),
+  json(),
+  typescript({
+    tsconfig: false,
+    target: 'es5',
+    strict: true,
+  }),
+  // babel({
+  //   babelrc: false,
+  //   babelHelpers: 'bundled',
+  //   presets: [
+  //     ['@babel/env', { modules: false }],
+  //     ['@babel/typescript', { tsconfig: false }],
+  //   ],
+  // }),
 ]
 
 export function getLibConfig(packageConfig: PackageConfig): RollupOptions[] {
@@ -30,11 +48,11 @@ export function getLibConfig(packageConfig: PackageConfig): RollupOptions[] {
   const banner = getBanner()
 
   return [
-    {
-      input: 'src/index.ts',
-      output: [{ file: 'types/index.d.ts', format: 'es' }],
-      plugins: [dts()],
-    },
+    // {
+    //   input: 'src/index.ts',
+    //   output: [{ file: 'types/index.d.ts', format: 'es' }],
+    //   plugins: [dts()],
+    // },
     {
       input: 'src/index.ts',
       output: [
