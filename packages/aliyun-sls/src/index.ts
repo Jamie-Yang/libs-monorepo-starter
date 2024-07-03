@@ -1,7 +1,7 @@
 import type { WebTrackerBrowserOptions } from '@aliyun-sls/web-types'
 
 import SlsTracker from '@aliyun-sls/web-track-browser'
-import { parse as useragentParse } from 'useragent'
+import UAParser from 'ua-parser-js'
 
 type TrackerOptions = WebTrackerBrowserOptions & {
   host?: string
@@ -29,14 +29,18 @@ export function createSlsTracker(options: TrackerOptions) {
 }
 
 function getPresetData() {
-  const ua = useragentParse(navigator.userAgent)
+  const ua = new UAParser(navigator.userAgent)
+  const device = ua.getDevice()
+  const stringify = (data: { name?: string; version?: string }) => `${data.name} ${data.version}`
 
   return {
     _url_: location.href,
     _title_: document.title,
     _referrer_: document.referrer || (opener && opener.location.href) || '',
     _ua_: navigator.userAgent,
-    _os_: ua.os.toString(),
-    _browser_: ua.toAgent(),
+    _device_: `${device.vendor} ${device.model}`,
+    _os_: stringify(ua.getOS()),
+    _browser_: stringify(ua.getBrowser()),
+    _engine_: stringify(ua.getEngine()),
   }
 }

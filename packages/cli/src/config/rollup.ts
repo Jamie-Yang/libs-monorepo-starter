@@ -2,12 +2,13 @@ import type { RollupOptions } from 'rollup'
 
 import { createRequire } from 'module'
 
-import babel from '@rollup/plugin-babel'
+import { babel } from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
-import nodeResolve from '@rollup/plugin-node-resolve'
-// import terser from '@rollup/plugin-terser'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 import typescript from '@rollup/plugin-typescript'
+// import terser from '@rollup/plugin-terser'
+import del from 'rollup-plugin-delete'
 import dts from 'rollup-plugin-dts'
 
 import { PACKAGE_JSON } from '../shared/constant.js'
@@ -18,29 +19,26 @@ interface PackageConfig {
 }
 
 const require = createRequire(import.meta.url)
-
-const extensions = ['.js', '.ts']
+const { DEFAULT_EXTENSIONS } = require('@babel/core')
 
 const commonPlugins = [
+  del({ targets: ['lib/*', 'types/*'] }),
   nodeResolve({
-    extensions,
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     preferBuiltins: false,
   }),
   commonjs(),
   json(),
-  typescript({
-    tsconfig: false,
-    target: 'es5',
-    strict: true,
+  typescript(),
+  babel({
+    extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx'],
+    babelrc: false,
+    babelHelpers: 'bundled',
+    presets: [
+      ['@babel/preset-env', { modules: false }],
+      // ['@babel/preset-typescript', { tsconfig: false }],
+    ],
   }),
-  // babel({
-  //   babelrc: false,
-  //   babelHelpers: 'bundled',
-  //   presets: [
-  //     ['@babel/env', { modules: false }],
-  //     ['@babel/typescript', { tsconfig: false }],
-  //   ],
-  // }),
 ]
 
 export function getLibConfig(packageConfig: PackageConfig): RollupOptions[] {
@@ -48,11 +46,6 @@ export function getLibConfig(packageConfig: PackageConfig): RollupOptions[] {
   const banner = getBanner()
 
   return [
-    // {
-    //   input: 'src/index.ts',
-    //   output: [{ file: 'types/index.d.ts', format: 'es' }],
-    //   plugins: [dts()],
-    // },
     {
       input: 'src/index.ts',
       output: [
@@ -60,6 +53,11 @@ export function getLibConfig(packageConfig: PackageConfig): RollupOptions[] {
         // { banner, exports: 'auto', format: 'umd', name, file: `dist/${name}.umd.js` },
       ],
       plugins: commonPlugins,
+    },
+    {
+      input: 'lib/index.d.ts',
+      output: [{ file: 'types/index.d.ts', format: 'es' }],
+      plugins: [dts(), del({ targets: 'lib/*.d.ts', hook: 'buildEnd' })],
     },
     // {
     //   input: 'src/index.ts',

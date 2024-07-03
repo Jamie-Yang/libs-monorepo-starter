@@ -1,5 +1,6 @@
 import type { InlineConfig, PluginOption } from 'vite'
 
+import legacy from '@vitejs/plugin-legacy'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { mergeConfig } from 'vite'
@@ -53,6 +54,7 @@ export function getBuildConfig(packageConfig: PackageConfig): InlineConfig {
       emptyOutDir: true,
       cssTarget: 'chrome61',
     },
+    plugins: [legacy()],
   }
 
   return mergeConfig(buildConfig, configureVite(buildConfig, 'build') ?? {}, false)

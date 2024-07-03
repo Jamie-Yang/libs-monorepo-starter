@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "cli dev",
     "build": "npm run type-check && cli build",
+    "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
     "preview": "cli preview"
   },
   "dependencies": {
