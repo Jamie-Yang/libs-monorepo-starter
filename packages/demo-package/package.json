@@ -2,17 +2,14 @@
   "name": "demo-package",
   "version": "0.0.0",
   "type": "module",
-  "module": "./lib/demo-package.es.ts",
   "exports": {
     ".": {
-      "import": "./lib/demo-package.es.ts",
-      "types": "./lib/demo-package.d.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs"
     }
   },
   "files": [
-    "lib",
-    "types",
-    "tsconfig.json"
+    "dist"
   ],
   "scripts": {
     "dev": "cli lib-bundle --watch",

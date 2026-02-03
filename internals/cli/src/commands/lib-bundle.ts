@@ -1,49 +1,52 @@
 import { createRequire } from 'node:module'
 
+import { build } from 'unbuild'
+
 import { getConfig } from '../config/index.js'
-import { getLibConfig } from '../config/rollup.js'
+import { CWD, PACKAGE_JSON } from '../shared/constant.js'
 import { getEntry } from '../shared/entry.js'
 import logger from '../shared/logger.js'
 
 const require = createRequire(import.meta.url)
-const rollup = require('rollup')
 
 export async function libBundle({ watch = false }) {
-  if (!getEntry()) {
-    logger.warning('Entry not found')
+  const pkg = require(PACKAGE_JSON)
+  const entry = getEntry()
+
+  if (!entry) {
+    logger.error('No entry file found (src/index.ts or src/main.ts)')
     return
   }
 
-  const config = await getConfig()
-  const optionsList = getLibConfig(config)
+  const banner = `/*
+ * ${pkg.name}
+ * version ${pkg.version}
+ */`
 
-  if (watch) {
-    const watcher = rollup.watch(optionsList)
+  logger.info(`Bundling utility library: ${pkg.name}${watch ? ' (stub mode)' : ''}...`)
 
-    watcher.on('event', (event: { code: string; duration?: number; error?: Error }) => {
-      switch (event.code) {
-        case 'START':
-          logger.info('Bundling...')
-          break
-        case 'BUNDLE_END':
-          logger.success(`Bundled in ${event.duration}ms`)
-          break
-        case 'ERROR':
-          if (event.error) {
-            logger.error(event.error.toString())
-          }
-          break
-      }
+  try {
+    const config = await getConfig()
+
+    await build(CWD, watch, {
+      name: (config.name as string) || pkg.name,
+      entries: [entry],
+      declaration: true,
+      clean: true,
+      rollup: {
+        emitCJS: false,
+        output: {
+          banner,
+        },
+      },
+      // 允许通过 cli.config.js 扩展 unbuild 配置
+      ...(config.unbuild || {}),
     })
-  } else {
-    try {
-      for (const options of optionsList) {
-        const bundle = await rollup.rollup(options)
-        const output = Array.isArray(options.output) ? options.output : [options.output]
-        await Promise.all(output.map(bundle.write))
-      }
-    } catch (e: unknown) {
-      logger.error((e as Error).toString())
+
+    if (!watch) {
+      logger.success('Bundled successfully')
     }
+  } catch (e: unknown) {
+    logger.error((e as Error).toString())
   }
 }

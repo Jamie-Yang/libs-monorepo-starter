@@ -10,7 +10,7 @@ export const PACKAGE_CONFIG = resolve(CWD, 'cli.config.js')
 export const PACKAGE_SOURCE_PATH = resolve(CWD, 'src')
 export const PACKAGE_TS_ENTRY = resolve(CWD, 'src/index.ts')
 export const PACKAGE_JS_ENTRY = resolve(CWD, 'src/index.js')
-export const PACKAGE_OUTPUT_PATH = resolve(CWD, 'lib')
+export const PACKAGE_OUTPUT_PATH = resolve(CWD, 'dist')
 
 export const VITE_LIBRARY_FORMATS: LibraryFormats[] = ['es']
 export const VITE_RESOLVE_EXTENSIONS = ['.vue', '.tsx', '.ts', '.jsx', '.js', '.scss', '.css']

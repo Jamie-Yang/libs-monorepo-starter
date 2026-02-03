@@ -13,6 +13,7 @@ import { getEntry } from '../shared/entry.js'
 interface PackageConfig {
   name?: string // lib name
   host?: boolean
+  entry?: string
   configureVite?: (config: InlineConfig, command: string) => InlineConfig
 }
 
@@ -91,7 +92,7 @@ export function getLibConfig(packageConfig: PackageConfig): InlineConfig {
       lib: {
         formats: VITE_LIBRARY_FORMATS,
         fileName: (format: string) => `${name}.${format}.js`,
-        entry: getEntry()!,
+        entry: getEntry(packageConfig.entry)!,
       },
       rollupOptions: {
         external: ['vue'],
