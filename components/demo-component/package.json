@@ -17,6 +17,6 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "vue": "^3.5.27"
+    "vue": "catalog:"
   }
 }

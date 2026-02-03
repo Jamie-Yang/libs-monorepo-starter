@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",
-    "@tsconfig/node20": "^20.1.8",
+    "@tsconfig/node20": "catalog:",
     "@types/node": "^22.15.19",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.54.0",
@@ -30,5 +30,8 @@
     "globals": "^17.3.0",
     "typescript-eslint": "^8.54.0",
     "vue-eslint-parser": "^10.2.0"
+  },
+  "devDependencies": {
+    "unbuild": "catalog:"
   }
 }

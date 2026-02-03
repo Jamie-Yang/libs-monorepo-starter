@@ -16,7 +16,7 @@
     "build": "cli lib-bundle"
   },
   "dependencies": {
-    "chalk": "^5.6.2"
+    "chalk": "catalog:"
   },
   "devDependencies": {}
 }

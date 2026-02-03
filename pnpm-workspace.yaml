@@ -3,3 +3,10 @@ packages:
   - 'components/*'
   - 'internals/*'
   - 'packages/*'
+
+catalog:
+  '@tsconfig/node20': ^20.1.8
+  chalk: ^5.6.2
+  unbuild: ^3.6.1
+  vue: ^3.5.27
+  vue-tsc: ^3.2.4
