@@ -10,8 +10,5 @@
     "node.json",
     "web-app.json",
     "web.json"
-  ],
-  "dependencies": {
-    "vite": "^7.3.1"
-  }
+  ]
 }

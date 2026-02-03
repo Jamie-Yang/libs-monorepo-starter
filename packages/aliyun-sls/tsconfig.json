@@ -1,16 +1,7 @@
 {
+  "extends": "@internals/tsconfig/library.json",
   "compilerOptions": {
-    "outDir": "./lib",
-    "target": "ESNext",
-    "module": "ESNext",
-    "strict": true,
-    "downlevelIteration": true,
-    "declaration": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "moduleResolution": "Node",
-    "lib": ["esnext", "dom"],
-    "allowJs": true
+    "outDir": "./dist"
   },
   "include": ["src/**/*"]
 }
