@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@internals/tsconfig/node.json",
+
+  "compilerOptions": {
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext"
+  },
+
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

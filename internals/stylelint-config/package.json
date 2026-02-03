@@ -1,0 +1,20 @@
+{
+  "name": "@internals/stylelint-config",
+  "version": "1.0.0",
+  "description": "stylelint config",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js"
+    }
+  },
+  "dependencies": {
+    "postcss-html": "^1.8.1",
+    "stylelint": "^16.26.1",
+    "stylelint-config-recess-order": "^7.6.0",
+    "stylelint-config-standard-scss": "^16.0.0",
+    "stylelint-config-standard-vue": "^1.0.0",
+    "stylelint-order": "^7.0.1"
+  }
+}

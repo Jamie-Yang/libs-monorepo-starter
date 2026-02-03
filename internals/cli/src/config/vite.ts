@@ -18,6 +18,9 @@ interface PackageConfig {
 
 const commonPlugins = [vue(), vueJsx()] as PluginOption[]
 
+/**
+ * Base Vite configuration
+ */
 export function getBaseConfig(packageConfig: PackageConfig): InlineConfig {
   const { host = true } = packageConfig
 
@@ -34,6 +37,9 @@ export function getBaseConfig(packageConfig: PackageConfig): InlineConfig {
   }
 }
 
+/**
+ * Development Vite configuration
+ */
 export function getDevConfig(packageConfig: PackageConfig): InlineConfig {
   const configureVite = packageConfig.configureVite ?? (() => ({}))
   const baseConfig = getBaseConfig(packageConfig)
@@ -41,6 +47,9 @@ export function getDevConfig(packageConfig: PackageConfig): InlineConfig {
   return mergeConfig(baseConfig, configureVite(baseConfig, 'dev') ?? {}, false)
 }
 
+/**
+ * Production Vite configuration
+ */
 export function getBuildConfig(packageConfig: PackageConfig): InlineConfig {
   const { configureVite = () => {} } = packageConfig
   const baseConfig = getBaseConfig(packageConfig)
@@ -60,6 +69,9 @@ export function getBuildConfig(packageConfig: PackageConfig): InlineConfig {
   return mergeConfig(buildConfig, configureVite(buildConfig, 'build') ?? {}, false)
 }
 
+/**
+ * Library Vite configuration
+ */
 export function getLibConfig(packageConfig: PackageConfig): InlineConfig {
   const { name, configureVite = () => {} } = packageConfig
 

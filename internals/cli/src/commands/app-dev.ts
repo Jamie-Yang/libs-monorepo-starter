@@ -12,12 +12,14 @@ import logger from '../shared/logger.js'
 let server: ViteDevServer
 let watcher: FSWatcher
 
-async function startServer(force: boolean | undefined) {
-  const isRestart = Boolean(server)
-  logger.info(`${isRestart ? 'Res' : 'S'}tarting server...`)
+export async function appDev(args: { force?: boolean }) {
+  const { force = false } = args
 
-  server && (await server.close())
-  watcher && (await watcher.close())
+  const isRestart = Boolean(server)
+  logger.info(`${isRestart ? 'Restarting' : 'Starting'} server...`)
+
+  if (server) await server.close()
+  if (watcher) await watcher.close()
 
   const config = await getConfig()
   const devConfig = getDevConfig(config)
@@ -29,12 +31,8 @@ async function startServer(force: boolean | undefined) {
 
   if (pathExistsSync(PACKAGE_CONFIG)) {
     watcher = chokidar.watch(PACKAGE_CONFIG)
-    watcher.on('change', () => startServer(force))
+    watcher.on('change', () => appDev({ force }))
   }
 
-  logger.success(`\n${isRestart ? 'Res' : 'S'}tart successfully!!!`)
-}
-
-export async function dev(cmd: { force?: boolean }) {
-  await startServer(cmd.force)
+  logger.success(`\n${isRestart ? 'Restarted' : 'Started'} server successfully!`)
 }

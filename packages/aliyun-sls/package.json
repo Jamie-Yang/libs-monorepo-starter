@@ -17,16 +17,16 @@
     "README.md"
   ],
   "scripts": {
-    "dev": "cli bundle --watch",
-    "build": "cli bundle"
+    "dev": "cli lib-bundle --watch",
+    "build": "cli lib-bundle"
   },
   "dependencies": {
-    "@aliyun-sls/web-track-browser": "^0.3.5",
+    "@aliyun-sls/web-track-browser": "^0.3.9",
     "@types/ua-parser-js": "^0.7.39",
-    "ua-parser-js": "^1.0.38"
+    "ua-parser-js": "^2.0.8"
   },
   "devDependencies": {
-    "@aliyun-sls/web-types": "^0.3.5",
-    "@babel/preset-typescript": "^7.24.7"
+    "@aliyun-sls/web-types": "^0.3.9",
+    "@babel/preset-typescript": "^7.28.5"
   }
 }

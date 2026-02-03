@@ -15,8 +15,8 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "dev": "cli compile -w",
-    "build": "cli compile"
+    "dev": "cli ui-bundle -w",
+    "build": "cli ui-bundle"
   },
   "dependencies": {},
   "peerDependencies": {

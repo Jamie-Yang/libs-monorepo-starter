@@ -1,0 +1,15 @@
+{
+  "name": "@internals/prettier-config",
+  "version": "1.0.0",
+  "description": "prettier config",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js"
+    }
+  },
+  "devDependencies": {
+    "prettier": "^3.8.1"
+  }
+}

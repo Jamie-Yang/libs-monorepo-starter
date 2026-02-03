@@ -4,19 +4,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "cli dev",
-    "build": "npm run type-check && cli build",
+    "dev": "cli app-dev",
+    "build": "npm run type-check && cli app-build",
     "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
-    "preview": "cli preview"
+    "preview": "cli app-preview"
   },
   "dependencies": {
     "demo-component": "workspace:*",
-    "pinia": "^2.1.7",
-    "vue": "^3.4.27",
-    "vue-router": "^4.3.3"
+    "pinia": "^3.0.4",
+    "vue": "^3.5.27",
+    "vue-router": "^5.0.2"
   },
   "devDependencies": {
-    "@tsconfig/node20": "^20.1.4",
-    "@vue/tsconfig": "^0.5.1"
+    "@tsconfig/node20": "^20.1.8",
+    "@vue/tsconfig": "^0.8.1"
   }
 }
