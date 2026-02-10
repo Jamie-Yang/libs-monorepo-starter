@@ -64,7 +64,7 @@ export function getBuildConfig(packageConfig: PackageConfig): InlineConfig {
       emptyOutDir: true,
       cssTarget: 'chrome61',
     },
-    plugins: [legacy()],
+    plugins: [...commonPlugins, legacy()],
   }
 
   return mergeConfig(buildConfig, configureVite(buildConfig, 'build') ?? {}, false)

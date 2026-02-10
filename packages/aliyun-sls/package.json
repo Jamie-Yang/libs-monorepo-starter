@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@aliyun-sls/web-track-browser": "^0.3.9",
-    "ua-parser-js": "^2.0.8"
+    "ua-parser-js": "^2.0.9"
   },
   "peerDependencies": {
     "ua-parser-js": "^2.0.8"
